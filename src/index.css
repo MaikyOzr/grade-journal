@@ -1,0 +1,384 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color: #1a472a;
+  --secondary-color: #2d5a3f;
+  --accent-color: #4a7856;
+  --background-color: #f5f5f5;
+  --text-color: #333333;
+  --border-color: #e0e0e0;
+  --card-background: #ffffff;
+  --hover-color: #f0f0f0;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+  --primary-color: #2d5a3f;
+  --secondary-color: #4a7856;
+  --accent-color: #6b9c7d;
+  --background-color: #1a1a1a;
+  --text-color: #e0e0e0;
+  --border-color: #333333;
+  --card-background: #2d2d2d;
+  --hover-color: #3d3d3d;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.theme-toggle {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  z-index: 1000;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+}
+
+.loading-spinner {
+  width: 3rem;
+  height: 3rem;
+  border: 4px solid var(--border-color);
+  border-top: 4px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.tooltip {
+  position: relative;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.5rem;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 1000;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.nav-container {
+  background-color: var(--primary-color);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.nav-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  color: var(--text-color);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s ease;
+}
+
+.nav-link:hover {
+  background-color: var(--secondary-color);
+}
+
+.nav-link.active {
+  background-color: var(--accent-color);
+}
+
+.page-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.page-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.journal-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.journal-header {
+  background-color: var(--card-background);
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px var(--shadow-color);
+  margin-bottom: 2rem;
+}
+
+.student-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.info-card {
+  background-color: var(--card-background);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px var(--shadow-color);
+  transition: transform 0.2s ease;
+  color: var(--text-color);
+}
+
+.info-card:hover {
+  transform: translateY(-2px);
+}
+
+.grades-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--card-background);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 2px 4px var(--shadow-color);
+  color: var(--text-color);
+}
+
+.grades-table th,
+.grades-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.grades-table th {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+.grades-table tr:hover {
+  background-color: var(--hover-color);
+}
+
+.grade-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  transition: transform 0.2s ease;
+  color: white;
+}
+
+.grade-badge:hover {
+  transform: scale(1.1);
+}
+
+.grade-badge.excellent {
+  background-color: #4caf50;
+}
+
+.grade-badge.good {
+  background-color: #2196f3;
+}
+
+.grade-badge.satisfactory {
+  background-color: #ff9800;
+}
+
+.grade-badge.poor {
+  background-color: #f44336;
+}
+
+select {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.25rem;
+  background-color: var(--card-background);
+  color: var(--text-color);
+  transition: border-color 0.2s ease;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+}
+
+select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(26, 71, 42, 0.2);
+}
+
+@media (max-width: 768px) {
+  .nav-content {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .nav-links {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .student-info {
+    grid-template-columns: 1fr;
+  }
+
+  .grades-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .theme-toggle {
+    bottom: 1rem;
+    right: 1rem;
+  }
+}
+
+@media print {
+  .nav-container,
+  .theme-toggle {
+    display: none;
+  }
+
+  .journal-container {
+    padding: 0;
+  }
+
+  .journal-header,
+  .info-card {
+    box-shadow: none;
+    border: 1px solid var(--border-color);
+  }
+
+  .grades-table {
+    box-shadow: none;
+    border: 1px solid var(--border-color);
+  }
+
+  .grade-badge {
+    border: 1px solid currentColor;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-color);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.chart-container {
+  position: relative;
+  height: 200px;
+}
+
+.chart-line {
+  fill: none;
+  stroke: var(--primary-color);
+  stroke-width: 2;
+}
+
+.chart-point {
+  fill: var(--accent-color);
+  transition: transform 0.2s ease;
+}
+
+.chart-point:hover {
+  transform: scale(1.5);
+}
+
+.chart-grid {
+  stroke: var(--border-color);
+  stroke-width: 0.5;
+}
+
