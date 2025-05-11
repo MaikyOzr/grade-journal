@@ -106,3 +106,34 @@ button:hover {
   color: #333;
   line-height: 1.5;
 }
+
+.excel-import {
+  margin: 20px 0;
+}
+
+.file-upload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.upload-button:hover {
+  background-color: #45a049;
+}
+
+.excel-import-section {
+  margin: 20px 0;
+  padding: 20px;
+  background-color: var(--background-secondary);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
